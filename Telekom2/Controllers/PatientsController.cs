@@ -1,11 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
-using System.Runtime.CompilerServices;
-using System.Security.Cryptography.X509Certificates;
 using System.Text.Json;
 using System.Threading.Tasks;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Telekom2.Data;
@@ -27,11 +23,7 @@ namespace Telekom2.Controllers
         // GET: api/Patients
         [HttpGet]
         public ActionResult<string> GetPatient()
-        {
-            //var result = await _context.Patient.Select(
-            //      x => new Patient { firstName = x.firstName, lastName = x.lastName }
-            //      ).ToListAsync();
-
+        { 
             var rawJsonResult = (from p in _context.Patient
                                  join c in _context.City on p.cityID equals c.ID
                                  join s in _context.State on p.stateID equals s.ID
@@ -49,33 +41,7 @@ namespace Telekom2.Controllers
             jsonString = JsonSerializer.Serialize(rawJsonResult);
             return jsonString;
         }
-
-        //// GET: api/Patients
-        //[HttpGet]
-        //public async Task<ActionResult<IEnumerable<Patient>>> GetPatient()
-        //{
-        //    var result = await _context.Patient.Select(
-        //          x => new Patient { firstName = x.firstName, lastName = x.lastName }
-        //          ).ToListAsync();
-
-        //    var entryPoint = (from p in _context.Patient
-        //                      join s in _context.State on p.stateID equals s.ID
-        //                      select new Patient
-        //                      {
-        //                          firstName = p.firstName,
-        //                          lastName = p.lastName,
-        //                          stateID = s.Name
-        //                      });
-        //    return result;
-        //}
-
-        //// GET: api/Patients
-        //[HttpGet]
-        //public async Task<ActionResult<IEnumerable<Patient>>> GetPatient()
-        //{
-        //    return await _context.Patient.ToListAsync();
-        //}
-
+         
         // GET: api/Patients/5
         [HttpGet("{id}")]
         public async Task<ActionResult<Patient>> GetPatient(int id)
