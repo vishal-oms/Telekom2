@@ -30,7 +30,7 @@ namespace Telekom2.Controllers
         [HttpGet("GetCityByStateID/{id}")]
         public async Task<ActionResult<IEnumerable<City>>> GetCityByStateID(int id)
         {
-            var city = await _context.City.Where(s => s.State.ID == id).ToListAsync();
+            var city = await _context.City.Where(s => s.StateID == id).ToListAsync();
 
             if (city == null)
             {
